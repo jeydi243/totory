@@ -1,0 +1,21 @@
+{
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "120"],
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.useLibraryCodeForTypes": true,
+  "python.linting.enabled": true,
+  "python.formatting.blackPath": "black",
+  "window.autoDetectColorScheme": true,
+  "workbench.preferredLightColorTheme": "GitHub Light Default",
+  "workbench.preferredDarkColorTheme": "Dracula",
+  "terminal.integrated.fontFamily": "Cascadia Code",
+  "editor.fontFamily": "'Cascadia Code', 'Courier New', monospace",
+  "[python]": {
+    "gitlens.codeLens.symbolScopes": ["!Module"],
+    "breadcrumbs.showBooleans": true,
+    "breadcrumbs.showFiles": true,
+    "diffEditor.wordWrap": "off"
+  },
+  "workbench.colorTheme": "Dracula"
+}
