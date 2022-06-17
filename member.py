@@ -25,3 +25,10 @@ class Member(BaseModel):
     name: str = Field(min_length=3, max_length=50)
     date_naissance: date = Field(...)
     email: Optional[EmailStr]
+    
+class MemberDTO(BaseModel):
+    id: ID
+    name: str 
+    date_naissance: date
+    email: Optional[EmailStr]
+

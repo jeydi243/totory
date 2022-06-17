@@ -1,13 +1,8 @@
-
 from pydantic import BaseModel, Field, EmailStr, Optional
 from member import Member
+from models.students import PersonDTO
 
-
-
-class StudentModel(Member):  
-    
-    name: str = Field()
-    email: EmailStr = Field(...)
+class StudentModel(PersonDTO):
     course: str = Field(...)
     gpa: float = Field(..., le=4.0)
 
@@ -23,6 +18,10 @@ class StudentModel(Member):
                 "gpa": "3.0",
             }
         }
+
+
+class StudentDTO(BaseModel):
+    pass
 
 
 class UpdateStudentModel(BaseModel):
