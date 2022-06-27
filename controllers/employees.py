@@ -1,32 +1,32 @@
 from main import app
 from mongoengine.errors import NotUniqueError
-from schemas.student import Student
+from schemas.employee import Employee
 from fastapi import FastAPI, Form, Request, UploadFile, File
 
 
 app = FastAPI()
 
 
-@app.post("/students")
-def add_student():
+@app.post("/employees")
+def add_employee():
     try:
-        res = Student().save()
+        res = Employee().save()
     except NotUniqueError as e:
         print(e)
     return {"message": "Hello World"}
 
 
-# all endpoint for model students
-@app.get("/students")
-def get_students():
-    return Student.objects
+# all endpoint for model employees
+@app.get("/employees")
+def get_employees():
+    return Employee.objects
 
 
-@app.patch("/students")
-def update_student():
+@app.patch("/employees")
+def update_employee():
     return {"message": "Hello World"}
 
 
-@app.delete("/students")
-def delete_student():
+@app.delete("/employees")
+def delete_employee():
     return {"message": "Hello World"}

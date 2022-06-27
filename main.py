@@ -9,9 +9,11 @@ import shutil
 from fastapi.exceptions import RequestValidationError, ValidationError
 from fastapi.responses import JSONResponse
 from models.employee import EmployeeDTO
+from mongoengine import connect
 
 
 load_dotenv()
+connect(db="gesi-development", host="localhost", port=27017)
 
 app = FastAPI()
 # client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGO_URI_DEV"])
@@ -41,11 +43,11 @@ async def add_employee(
     print(profile_img.content_type)
 
     try:
-        path_to_store = store_path("resume_file",ext, "employees", "fd1452fvd")
+        path_to_store = store_path("resume_file", ext, "employees", "fd1452fvd")
         with open(path_to_store, "wb") as buffer:
             shutil.copyfileobj(resume_file.file, buffer)
 
-        path_to_store = store_path("diploma_file",ext, "employees", "fd1452fvd")
+        path_to_store = store_path("diploma_file", ext, "employees", "fd1452fvd")
         with open(path_to_store, "wb") as buffer:
             shutil.copyfileobj(school_diploma_file.file, buffer)
 
@@ -58,7 +60,7 @@ async def add_employee(
     return {"message": cover_letter}
 
 
-def store_path(filename: str,ext:str, model: str, id: str) -> str:
+def store_path(filename: str, ext: str, model: str, id: str) -> str:
     # return current word directory cwd
     to_create = os.path.join(os.getcwd(), "STORAGES")
     if not os.path.exists(to_create):
