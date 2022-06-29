@@ -1,14 +1,19 @@
 from main import app
 from mongoengine.errors import NotUniqueError
 from schemas.teacher import Teacher
-from dto.teacher import TeacherDTO
-from fastapi import FastAPI, Form, Request, UploadFile, File
+from dtos.teacher import TeacherDTO
+from fastapi import APIRouter, Form, Request, UploadFile, File, Depends
 
 
-app = FastAPI()
+router = APIRouter(
+    prefix="/teachers",
+    tags=["management"],
+    dependencies=[Depends(get_token_header)],
+    responses={404: {"description": "Not found"}},
+)
 
 
-@app.post("/teachers")
+@router.post("/")
 def add_teacher(teacher: TeacherDTO):
     try:
         res = Teacher().save()
@@ -18,16 +23,16 @@ def add_teacher(teacher: TeacherDTO):
 
 
 # all endpoint for model teachers
-@app.get("/teachers")
+@router.get("/")
 def get_teachers():
     return Teacher.objects
 
 
-@app.patch("/teachers")
+@router.patch("/")
 def update_teacher():
     return {"message": "Hello World"}
 
 
-@app.delete("/teachers")
+@router.delete("/")
 def delete_teacher():
     return {"message": "Hello World"}

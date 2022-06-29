@@ -1,13 +1,19 @@
 from main import app
 from mongoengine.errors import NotUniqueError
 from schemas.student import Student
-from fastapi import FastAPI, Form, Request, UploadFile, File
+from fastapi import APIRouter, Depends, FastAPI, Form, Request, UploadFile, File
+from ..dependencies import get_token_header
 
 
-app = FastAPI()
+router = APIRouter(
+    prefix="/students",
+    tags=["management"],
+    dependencies=[Depends(get_token_header)],
+    responses={404: {"description": "Not found methods"}},
+)
 
 
-@app.post("/students")
+@router.post("/")
 def add_student():
     try:
         res = Student().save()
@@ -17,16 +23,16 @@ def add_student():
 
 
 # all endpoint for model students
-@app.get("/students")
+@router.get("/")
 def get_students():
     return Student.objects
 
 
-@app.patch("/students")
+@router.patch("/")
 def update_student():
-    return {"message": "Hello World"}
+    return {"message": "Method must be implemented"}
 
 
-@app.delete("/students")
+@router.delete("/")
 def delete_student():
-    return {"message": "Hello World"}
+    return {"message": "Method must be implemented"}

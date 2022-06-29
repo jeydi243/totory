@@ -1,3 +1,4 @@
+from datetime import datetime
 from mongoengine import EmailField, StringField, IntField, ReferenceField, FileField, DateTimeField, DictField, ListField
 
 from schemas.person import Person
@@ -12,6 +13,7 @@ class Employee(Person):
     resume_file = FileField(required=True)
 
     profile_img = FileField(required=True)
+    hire_date = DateTimeField(required=True, default=datetime.now())
 
     # init class
     def __init__(self, school_end_date, school_start_date):
