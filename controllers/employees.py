@@ -1,10 +1,9 @@
-from main import app
-from mongoengine.errors import NotUniqueError
+import os
+import shutil
 from schemas.employee import Employee
 from services.employee_service import EmployeeService
-from fastapi import FastAPI, Form, Request, UploadFile, File
-import shutil
-import os
+from fastapi import APIRouter, Form, UploadFile, File
+
 
 def store_path(filename: str, ext: str, model: str, id: str) -> str:
     # return current word directory cwd
@@ -22,11 +21,16 @@ def store_path(filename: str, ext: str, model: str, id: str) -> str:
     return os.path.join(to_create, filename)
 
 
-app = FastAPI()
+router = APIRouter(
+    prefix="/managements/employees",
+    tags=["management"],
+    responses={404: {"description": "Not found methods"}},
+)
+
 employee_service = EmployeeService()
 
 
-@app.post("/management/employees")
+@router.post("/")
 async def add_employee(
     cover_letter: str = Form(...),
     resume_file: UploadFile = File(...),
@@ -55,14 +59,12 @@ async def add_employee(
 
     return {"message": cover_letter}
 
-
 # all endpoint for model employees
-@app.get("/employees")
+@router.get("/")
 def get_employees():
     return Employee.objects
 
-
-@app.patch("/employees/update/{employee_id}/{type_file}")
+@router.patch("/update/{employee_id}/{type_file}")
 def update_employee(employee_id, type_file):
     result = None
     if type_file == "resume_file":
@@ -72,11 +74,9 @@ def update_employee(employee_id, type_file):
     else:
         result = employee_service.update_file("school_diploma_file")
 
-
-@app.delete("/employees")
+@router.delete("/")
 def delete_employee():
     return {"message": "Hello World"}
-
 
 def store_path(filename: str, ext: str, model: str, id: str) -> str:
     # return current word directory cwd

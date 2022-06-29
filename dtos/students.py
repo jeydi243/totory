@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field, EmailStr, Optional
 from member import Member
-from models.students import PersonDTO
+from ..schemas.students import PersonDTO
 
 class StudentDTO(PersonDTO):
     course: str = Field(...)

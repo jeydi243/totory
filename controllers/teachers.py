@@ -8,7 +8,6 @@ from fastapi import APIRouter, Form, Request, UploadFile, File, Depends
 router = APIRouter(
     prefix="/teachers",
     tags=["management"],
-    dependencies=[Depends(get_token_header)],
     responses={404: {"description": "Not found"}},
 )
 

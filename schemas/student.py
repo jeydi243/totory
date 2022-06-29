@@ -1,5 +1,5 @@
-from mongoengine import Document, EmailField, StringField, IntField, ReferenceField, DateTimeField, DictField, ListField
-from person import Person
+from mongoengine import EmailField, StringField, IntField, ReferenceField, DateTimeField, DictField, ListField
+from .person import Person
 from schemas.document_organisation import DocumentOrganisation
 from schemas.responsable import Responsable
 

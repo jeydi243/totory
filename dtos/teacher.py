@@ -1,5 +1,5 @@
-from pydantic import BaseModel, Field, EmailStr, Optional
+from pydantic import  Field, EmailStr
 from dtos.person import PersonDTO
 
-class Teacher(PersonDTO):
+class TeacherDTO(PersonDTO):
     resume_file: Field(...)
