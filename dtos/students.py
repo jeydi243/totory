@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field, EmailStr, Optional
 from member import Member
 from models.students import PersonDTO
 
-class StudentModel(PersonDTO):
+class StudentDTO(PersonDTO):
     course: str = Field(...)
     gpa: float = Field(..., le=4.0)
 

@@ -1,7 +1,7 @@
 import datetime
 from fastapi import UploadFile
 from pydantic import Field
-from models.person import PersonDTO
+from dto.person import PersonDTO
 
 
 class EmployeeDTO(PersonDTO):

@@ -8,7 +8,7 @@ import os
 import shutil
 from fastapi.exceptions import RequestValidationError, ValidationError
 from fastapi.responses import JSONResponse
-from models.employee import EmployeeDTO
+from dto.employee import EmployeeDTO
 from mongoengine import connect
 
 
