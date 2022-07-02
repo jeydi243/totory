@@ -16,9 +16,9 @@ connect(db=os.environ["DB_NAME_DEV"], host="localhost", port=27017)
 
 app = FastAPI()
 
-# app.include_router(teachers.router)
-# app.include_router(students.router)
-# app.include_router(employees.router)
+app.include_router(teachers.router)
+app.include_router(students.router)
+app.include_router(employees.router)
 
 
 @app.exception_handler(RequestValidationError)

@@ -1,7 +1,7 @@
 from mongoengine.errors import NotUniqueError
 from schemas.student import Student
-from fastapi import APIRouter, Form, Request, UploadFile, File
-
+from fastapi import APIRouter
+from dtos.student import StudentDTO
 
 router = APIRouter(
     prefix="/students",
@@ -11,7 +11,7 @@ router = APIRouter(
 
 
 @router.post("/")
-def add_student():
+def add_student(student: StudentDTO):
     try:
         res = Student().save()
     except NotUniqueError as e:

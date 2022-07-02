@@ -1,6 +1,7 @@
-from pydantic import BaseModel, Field, EmailStr, Optional
+from typing import Optional
+from pydantic import BaseModel, Field, EmailStr
 from member import Member
-from ..schemas.students import PersonDTO
+from dtos.person import PersonDTO
 
 class StudentDTO(PersonDTO):
     course: str = Field(...)
@@ -9,7 +10,6 @@ class StudentDTO(PersonDTO):
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
-        json_encoders = {ObjectId: str}
         schema_extra = {
             "example": {
                 "name": "Jane Doe",
@@ -32,7 +32,6 @@ class UpdateStudentModel(BaseModel):
 
     class Config:
         arbitrary_types_allowed = True
-        json_encoders = {ObjectId: str}
         schema_extra = {
             "example": {
                 "name": "Jane Doe",

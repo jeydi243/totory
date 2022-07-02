@@ -1,8 +1,7 @@
-from main import app
 from mongoengine.errors import NotUniqueError
 from schemas.teacher import Teacher
 from dtos.teacher import TeacherDTO
-from fastapi import APIRouter, Form, Request, UploadFile, File, Depends
+from fastapi import APIRouter
 
 
 router = APIRouter(
@@ -15,7 +14,7 @@ router = APIRouter(
 @router.post("/")
 def add_teacher(teacher: TeacherDTO):
     try:
-        res = Teacher().save()
+        res = Teacher(**teacher).save()
     except NotUniqueError as e:
         print(e)
     return {"message": "Hello World"}

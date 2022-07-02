@@ -1,8 +1,12 @@
 import os
-import shutil
+from tempfile import SpooledTemporaryFile
+from dtos.employee import EmployeeDTO
 from schemas.employee import Employee
 from services.employee_service import EmployeeService
 from fastapi import APIRouter, Form, UploadFile, File
+from shutil import copyfileobj, Error
+import pathlib
+from rich import print
 
 
 def store_path(filename: str, ext: str, model: str, id: str) -> str:
@@ -22,7 +26,7 @@ def store_path(filename: str, ext: str, model: str, id: str) -> str:
 
 
 router = APIRouter(
-    prefix="/managements/employees",
+    prefix="/management/employees",
     tags=["management"],
     responses={404: {"description": "Not found methods"}},
 )
@@ -30,39 +34,62 @@ router = APIRouter(
 employee_service = EmployeeService()
 
 
+def staff_resume(file: UploadFile):
+    ext = "." + file.content_type.split("/")[1]
+    path = store_path(f"resume_file{ext}",  "fd1452fvd")
+    if not pathlib.Path(path).exists:
+        try:
+            pathlib.Path(path).mkdir(parents=True)
+        except OSError as e:
+            print(f"Le fichier existe déja.")
+    with open(path, "wb") as buffer:
+        copyfileobj(file.file, buffer)
+
+
+def staff_diploma(file: UploadFile):
+    ext = "." + file.content_type.split("/")[1]
+    path = store_path(f"diploma_file{ext}", "fd1452fvd")
+    with open(path, "wb") as buffer:
+        copyfileobj(file.file, buffer)
+
+
+def staff_diploma(file: UploadFile):
+    ext = "." + file.content_type.split("/")[1]
+    path = store_path(f"profile_picture{ext}","fd1452fvd")
+    with open(path, "wb") as buffer:
+        copyfileobj(file.file, buffer)
+
+
 @router.post("/")
 async def add_employee(
-    cover_letter: str = Form(...),
+    employee: EmployeeDTO = Form(...),
     resume_file: UploadFile = File(...),
     school_diploma_file: UploadFile = File(...),
     profile_img: UploadFile = File(...),
 ):
-
-    print(resume_file.content_type)
-    print(school_diploma_file.content_type)
-    print(profile_img.content_type)
+    print(f"Body {employee}")
 
     try:
-        path_to_store = store_path("resume_file", ext, "employees", "fd1452fvd")
-        with open(path_to_store, "wb") as buffer:
-            shutil.copyfileobj(resume_file.file, buffer)
+        # start by adding employee to db
+        employee = employee_service.add_employee(employee)
+        staff_resume(resume_file)
+        staff_diploma(school_diploma_file)
+        staff_resume(profile_img)
 
-        path_to_store = store_path("diploma_file", ext, "employees", "fd1452fvd")
-        with open(path_to_store, "wb") as buffer:
-            shutil.copyfileobj(school_diploma_file.file, buffer)
-
-        path_to_store = store_path("profile_picture", "employees", "fd1452fvd")
-        with open(path_to_store, "wb") as buffer:
-            shutil.copyfileobj(profile_img.file, buffer)
+        return {"message": "Le traitement a été fait"}
     except FileNotFoundError as ffe:
-        print(ffe)
+        print(f"Error: {ffe}")
+        return {"message": "File not found errors"}
+    except Error as er:
+        print(f"Error un detected: {er}")
+        return {"f": "ff"}
 
-    return {"message": cover_letter}
 
 # all endpoint for model employees
 @router.get("/")
 def get_employees():
     return Employee.objects
+
 
 @router.patch("/update/{employee_id}/{type_file}")
 def update_employee(employee_id, type_file):
@@ -74,12 +101,15 @@ def update_employee(employee_id, type_file):
     else:
         result = employee_service.update_file("school_diploma_file")
 
+
 @router.delete("/")
 def delete_employee():
     return {"message": "Hello World"}
 
-def store_path(filename: str, ext: str, model: str, id: str) -> str:
+
+def store_path(filename: str, id: str) -> str:
     # return current word directory cwd
+    model = "employees"
     to_create = os.path.join(os.getcwd(), "STORAGES")
     if not os.path.exists(to_create):
         os.mkdir(to_create)
@@ -91,4 +121,5 @@ def store_path(filename: str, ext: str, model: str, id: str) -> str:
         to_create = os.path.join(to_create, id)
     if not os.path.exists(to_create):
         os.mkdir(to_create)
+        print(f"{id} directory created")
     return os.path.join(to_create, filename)

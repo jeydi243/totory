@@ -1,8 +1,7 @@
 from datetime import datetime
-from mongoengine import EmailField, StringField, IntField, ReferenceField, FileField, DateTimeField, DictField, ListField
+from mongoengine import StringField, FileField, DateTimeField
 
 from schemas.person import Person
-
 
 class Employee(Person):
     school_start_date = StringField(required=True)
