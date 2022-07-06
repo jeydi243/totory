@@ -4,12 +4,12 @@ from schemas.employee import Employee
 
 
 class EmployeeService:
-    def add_employee(employee: EmployeeDTO):
+    def add_employee(employee: EmployeeDTO) -> bool | str:
         try:
             employee = Employee(employee).save()
             return employee
         except ValidationError as ve:
-            print(f'Something went wrong {ve.json()}')
+            print(f"Something went wrong {ve.json()}")
 
     def all_employee():
         return Employee.objects
