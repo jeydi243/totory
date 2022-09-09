@@ -10,3 +10,4 @@ class OrgDTO(BaseModel):
     description: str = Field(...)
     date_desactivation: datetime.datetime | None = Field(...)
     date_creation: datetime.datetime = Field(...)
+    organization_parent_id: str | None = Field(...)
