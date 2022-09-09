@@ -5,7 +5,7 @@ import asyncio
 from rich import print
 from dotenv import load_dotenv
 from fastapi import FastAPI, Form, Request, UploadFile, File
-from controllers import teachers, students, employees
+from controllers import teachers, students, employees, users
 from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi.exceptions import RequestValidationError, ValidationError
@@ -28,6 +28,7 @@ app.add_middleware(
 app.include_router(teachers.router)
 app.include_router(students.router)
 app.include_router(employees.router)
+app.include_router(users.router)
 
 
 @app.exception_handler(RequestValidationError)
