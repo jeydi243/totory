@@ -1,6 +1,6 @@
 {
   "python.formatting.provider": "black",
-  "python.formatting.blackArgs": ["--line-length", "150"],
+  "python.formatting.blackArgs": ["--line-length", "250"],
   "python.terminal.activateEnvInCurrentTerminal": true,
   "python.analysis.autoImportCompletions": true,
   "python.analysis.useLibraryCodeForTypes": true,
@@ -9,15 +9,25 @@
 
   "window.autoDetectColorScheme": true,
   "workbench.preferredLightColorTheme": "GitHub Light Default",
-  "workbench.preferredDarkColorTheme": "Night Owl (No Italics)",
+  "workbench.preferredDarkColorTheme": "Bearded Theme Arc",
   "terminal.integrated.fontFamily": "Cascadia Code",
   "editor.fontFamily": "'Cascadia Code', 'Courier New', monospace",
   "[python]": {
     "gitlens.codeLens.symbolScopes": ["!Module"],
     "breadcrumbs.showBooleans": true,
     "breadcrumbs.showFiles": true,
-    "diffEditor.wordWrap": "off",
-    
+    "diffEditor.wordWrap": "off"
   },
-
+  "workbench.colorTheme": "Bearded Theme Arc",
+  "restoreTerminals.terminals": [
+    {
+      "splitTerminals": [
+        {
+          "name": "Run main app",
+          "commands": ["nodemon --exec py main.py"],
+          "shouldRunCommands": true
+        }
+      ]
+    }
+  ]
 }

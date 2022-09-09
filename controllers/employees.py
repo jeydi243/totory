@@ -1,6 +1,8 @@
 import os
 from tempfile import SpooledTemporaryFile
+from dtos.education_dto import EducationDTO
 from dtos.employee import EmployeeDTO
+from fastapi.exceptions import RequestValidationError, ValidationError
 from myutils import process_file
 from schemas.employee import Employee
 from services.employee_service import EmployeeService
@@ -35,19 +37,42 @@ router = APIRouter(
 employee_service = EmployeeService()
 
 
-@router.post("/")
-def add_employee(employee):
-    try:
-        print({employee})
-        em = employee_service.add_employee(employee)
+@router.get("")
+def get_employees():
+    print("To get all employees")
+    return employee_service.all_employee()
 
-        return {"message": "Le traitement a été fait"}
-    except FileNotFoundError as ffe:
-        print(f"Error: {ffe}")
-        return {"message": "File not found errors"}
+
+@router.post("")
+def add_employee(employee: EmployeeDTO):
+    try:
+        print(employee)
+        employee = employee_service.add_employee(employee)
+        print(f"{employee}")
+        return employee
     except Error as er:
         print(f"Error un detected: {er}")
         return {"f": "ff"}
+    except ValidationError as e:
+        print(e.json())
+
+
+@router.post("{employee_id}/add_education")
+def add_education(employee_id: str, education: EducationDTO):
+    employee_service.add_education(employee_id, education)
+    pass
+
+
+@router.post("{employee_id}/add_experience")
+def add_experience():
+    print("Hey...")
+    pass
+
+
+@router.post("{employee_id}/update_biography")
+def add_experience():
+    print("Hey...")
+    pass
 
 
 @router.post("/{employeeID}")
@@ -59,9 +84,9 @@ async def continue_add(
     process_file(profile_img, "profile_img", employeeID, "employee")
 
 
-@router.get("/")
-def get_employees():
-    return Employee.objects
+@router.get("/{emploeeID}")
+def employeeBy(emploeeID: str):
+    return employee_service.getby(emploeeID)
 
 
 @router.patch("/update/{employee_id}/{type_file}")
@@ -75,6 +100,6 @@ def update_employee(employee_id, type_file):
         result = employee_service.update_file("school_diploma_file")
 
 
-@router.delete("/")
-def delete_employee():
-    return {"message": "Hello World"}
+@router.delete("/{employeeID}")
+def delete_employee(employeeID: str):
+    return employee_service.delete_employee(employeeID)

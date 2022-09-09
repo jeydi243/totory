@@ -5,6 +5,9 @@ venv/*
 .env.test.local
 .env.production
 
+__pycache__/
+*.py[cod]
+
 venv/
 venv/Scripts/
 
