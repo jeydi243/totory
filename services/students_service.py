@@ -1,4 +1,4 @@
-from lib2to3.pytree import Base
+
 from pydantic import ValidationError
 from dtos.student import StudentDTO
 from schemas.student import Student
@@ -41,16 +41,16 @@ class StudentService:
             print("Mais b")
         return l
 
-    def getby(self, emploeeID: str):
-        return Student.objects.get(id=emploeeID)
+    def getby(self, studentID: str):
+        return Student.objects.get(id=studentID)
 
     def delete_student(self, studentID: str):
         try:
-            emp = Student.objects.get(id=emploeeID)
+            emp = Student.objects.get(id=studentID)
             emp.delete()
-            return f"Student with ID {emploeeID} deleted."
+            return f"Student with ID {studentID} deleted."
         except DoesNotExist as e:
-            print(f"Student with ID {emploeeID}, does not exist.")
+            print(f"Student with ID {studentID}, does not exist.")
 
     def update_file(fieldname, fichier):
         pass
