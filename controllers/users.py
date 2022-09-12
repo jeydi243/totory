@@ -1,5 +1,7 @@
 from fastapi import APIRouter
 
+from dtos.user_dto import UserDTO
+
 router = APIRouter(
     prefix="/users",
     tags=["users"],
@@ -7,11 +9,12 @@ router = APIRouter(
 )
 
 
-@router.get("/login")
-def login(user: None):
+@router.post("/login")
+def login(user: UserDTO):
     print(user)
+    return {"token": "123456789"}
 
 
-@router.get("logout")
+@router.get("/logout")
 def logout():
-    pass
+    return {"token": None}

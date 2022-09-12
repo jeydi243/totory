@@ -8,7 +8,7 @@ from datetime import datetime
 
 class EmployeeDTO(PersonDTO):
     domain: str | list[str] = Field(...)
-    position: str = Field(max_length=300)
+    position: str | list = Field(max_length=300)
     biography: str = Field(max_length=300)
     hire_date: str | datetime = Field(default=datetime.now())
     onboarding: list = None

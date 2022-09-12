@@ -44,9 +44,8 @@ class EmployeeService:
             print("TypeError: ", te)
         except ValueError as ve:
             print("ValueError: ", ve)
-        except:
-            print("Mais b")
-        return l
+        except BaseException as e:
+            print(f"{e}")
 
     def getby(self, emploeeID: str):
         return Employee.objects.get(id=emploeeID)

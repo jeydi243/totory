@@ -5,12 +5,12 @@ from schemas.person import Person
 
 
 class Employee(Person):
-    position = StringField(required=True)
+    position: str | list = ListField(StringField(required=True))
     biography = StringField(required=True, min_length=20, max_length=500)
     educations = ListField(DictField(required=True))
     onboarding = ListField(DictField(required=False))
     experiences = ListField(DictField(required=True))
-    domain = StringField(required=True)
+    domainstr: str | list = StringField(required=True)
 
     cover_letter = StringField(required=True, min_length=10, max_length=1000)
     hire_date = DateTimeField(required=True, default=datetime.now())
