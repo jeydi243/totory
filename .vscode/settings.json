@@ -24,7 +24,7 @@
       "splitTerminals": [
         {
           "name": "Run main app",
-          "commands": ["nodemon --exec py main.py"],
+          "commands": ["source f:/Projets/Python/totory/venv/Scripts/activate", "nodemon --exec py main.py"],
           "shouldRunCommands": true
         }
       ]

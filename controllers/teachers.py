@@ -21,9 +21,9 @@ def add_teacher(teacher: TeacherDTO):
 
 
 # all endpoint for model teachers
-@router.get("/")
+@router.get("")
 def get_teachers():
-    return Teacher.objects
+    return []
 
 
 @router.patch("/")

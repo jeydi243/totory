@@ -4,7 +4,7 @@ from dtos.employee import EmployeeDTO
 from schemas.employee import Employee
 from schemas.organization import Organization
 from mongoengine import DoesNotExist
-from mongoengine.errors import NotUniqueError
+from mongoengine.errors import NotUniqueError, FieldDoesNotExist
 
 
 class EmployeeService:
@@ -24,6 +24,8 @@ class EmployeeService:
             print("TypeError: ", te)
         except NotUniqueError as e:
             print(e.args[0])
+        except FieldDoesNotExist as fn:
+            print(f"Il te maque un champ {fn}")
 
     def getEmail(self, name, org_id):
         try:
@@ -35,11 +37,7 @@ class EmployeeService:
 
     def all_employee(self) -> list[any]:
         try:
-            # for emp in Employee.objects.to_json():
-            #     print(emp)
-            #     l.append(emp.to_json())
-            # Employee.objects.get(id="62ed1333f7d71e85d714fab8").delete()
-            return Employee.objects.to_json()
+            return Employee.objects.values_list()
         except TypeError as te:
             print("TypeError: ", te)
         except ValueError as ve:

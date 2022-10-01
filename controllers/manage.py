@@ -20,3 +20,8 @@ def registerOrg(organization: OrgDTO):
 @router.get("/organization")
 def getOrgs():
     return manage_service.getOrgs()
+
+
+@router.get("management/documents")
+def getDocs():
+    return []

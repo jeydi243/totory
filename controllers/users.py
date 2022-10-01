@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-
 from dtos.user_dto import UserDTO
 
 router = APIRouter(

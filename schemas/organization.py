@@ -6,6 +6,6 @@ class Organization(Document):
     name: str = StringField(require=True)
     domain: str = StringField(require=True)
     description: str = StringField()
-    organization_parent_id: str = StringField()
+    organization_parent_id: str | None = StringField(reuire=False)
 
     meta = {"strict": False}

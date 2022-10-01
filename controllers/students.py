@@ -20,9 +20,9 @@ def add_student(student: StudentDTO):
 
 
 # all endpoint for model students
-@router.get("/")
+@router.get("")
 def get_students():
-    return Student.objects
+    return []
 
 
 @router.patch("/")
