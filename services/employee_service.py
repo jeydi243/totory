@@ -1,10 +1,9 @@
-from lib2to3.pytree import Base
 from pydantic import ValidationError
+from mongoengine import DoesNotExist
 from dtos.employee import EmployeeDTO
 from schemas.employee import Employee
-from schemas.organization import Organization
-from mongoengine import DoesNotExist
 from mongoengine.errors import NotUniqueError, FieldDoesNotExist
+from schemas.organization import Organization
 
 
 class EmployeeService:

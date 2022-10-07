@@ -2,6 +2,9 @@ from mongoengine import Document, EmailField, StringField, IntField, DateTimeFie
 
 
 class DocumentOrganisation(Document):
-    code: StringField(required=True, max_length=10)
-    name: StringField(required=True, max_length=50)
-    description: StringField(max_length=500)
+    code: str = StringField(required=True, max_length=10)
+    name: str = StringField(required=True, max_length=50)
+    description: str = StringField(max_length=500)
+
+    def pre_save(cls, sender, document, **kwargs):
+        print("Pre Save of DocumentOrganisation: %s" % document.name)

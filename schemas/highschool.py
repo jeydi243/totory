@@ -4,5 +4,5 @@ from mongoengine import Document, EmailField, StringField, IntField, DateTimeFie
 class HighSchool(Document):
     id: StringField()
     name: StringField()
-    telephones: ListField() | StringField()
     email: EmailField()
+    telephones: ListField() | StringField()

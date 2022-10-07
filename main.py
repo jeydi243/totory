@@ -5,7 +5,7 @@ import asyncio
 from rich import print
 from dotenv import load_dotenv
 from fastapi import FastAPI, Form, Request, UploadFile, File
-from controllers import teachers, students, employees, users
+from controllers import teachers, students, employees, users, docs
 from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi.exceptions import RequestValidationError, ValidationError
@@ -25,10 +25,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(teachers.router)
-app.include_router(students.router)
-app.include_router(employees.router)
+app.include_router(docs.router)
 app.include_router(users.router)
+app.include_router(students.router)
+app.include_router(teachers.router)
+app.include_router(employees.router)
 
 
 @app.exception_handler(RequestValidationError)
@@ -50,4 +51,4 @@ async def root():
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=3000)
+    uvicorn.run(app, host="127.0.0.1", port=4000)

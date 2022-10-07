@@ -1,5 +1,4 @@
 import os
-from tempfile import SpooledTemporaryFile
 from dtos.education_dto import EducationDTO
 from dtos.employee import EmployeeDTO
 from fastapi.exceptions import RequestValidationError, ValidationError
@@ -7,7 +6,7 @@ from myutils import process_file
 from schemas.employee import Employee
 from services.employee_service import EmployeeService
 from fastapi import APIRouter, Form, UploadFile, File
-from shutil import copyfileobj, Error
+from shutil import Error
 import pathlib
 from rich import print
 
@@ -76,9 +75,7 @@ def add_experience():
 
 
 @router.post("/{employeeID}")
-async def continue_add(
-    employeeID: str, resume_file: UploadFile = File(...), school_diploma_file: UploadFile = File(...), profile_img: UploadFile = File(...)
-):
+async def continue_add(employeeID: str, resume_file: UploadFile = File(...), school_diploma_file: UploadFile = File(...), profile_img: UploadFile = File(...)):
     process_file(resume_file, "resume_file", employeeID, "employee")
     process_file(school_diploma_file, "school_diploma_file", employeeID, "employee")
     process_file(profile_img, "profile_img", employeeID, "employee")
