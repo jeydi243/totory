@@ -30,10 +30,10 @@ class DocumentService:
     def getDocuments(self) -> list[any]:
         try:
             vr = DocumentOrganisation.objects.as_pymongo()
-            for item in vr:
-                # print(f"Le monde {dir(item)}")
-                print(f"Le  {item}")
-            return DocumentOrganisation.objects(__raw__={})
+            # for item in vr:
+            #     print(f"Le  {item}")
+            #return DocumentOrganisation.objects(__raw__={})
+            return DocumentOrganisation.objects.as_pymongo()
         except TypeError as te:
             print("TypeError: ", te)
         except ValueError as ve:

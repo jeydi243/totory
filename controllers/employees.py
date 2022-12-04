@@ -1,14 +1,16 @@
 import os
+import pathlib
+from shutil import Error
+
+from fastapi import APIRouter, File, Form, UploadFile
+from fastapi.exceptions import RequestValidationError, ValidationError
+from rich import print
+
 from dtos.education_dto import EducationDTO
 from dtos.employee import EmployeeDTO
-from fastapi.exceptions import RequestValidationError, ValidationError
 from myutils import process_file
 from schemas.employee import Employee
 from services.employee_service import EmployeeService
-from fastapi import APIRouter, Form, UploadFile, File
-from shutil import Error
-import pathlib
-from rich import print
 
 
 def store_path(filename: str, ext: str, model: str, id: str) -> str:

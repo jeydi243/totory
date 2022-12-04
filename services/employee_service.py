@@ -1,8 +1,9 @@
-from pydantic import ValidationError
 from mongoengine import DoesNotExist
+from mongoengine.errors import FieldDoesNotExist, NotUniqueError
+from pydantic import ValidationError
+
 from dtos.employee import EmployeeDTO
 from schemas.employee import Employee
-from mongoengine.errors import NotUniqueError, FieldDoesNotExist
 from schemas.organization import Organization
 
 

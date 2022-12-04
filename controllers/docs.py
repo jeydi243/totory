@@ -1,8 +1,10 @@
 from fastapi import APIRouter
-from dtos.documentDTO import DocumentDTO
+from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError, ValidationError
-from services.document_service import DocumentService
+from fastapi.responses import JSONResponse
 
+from dtos.documentDTO import DocumentDTO
+from services.document_service import DocumentService
 
 router = APIRouter(
     prefix="/management/documents",
@@ -27,9 +29,8 @@ def add_document(document: DocumentDTO):
         return {"f": "ff"}
 
 
-@router.get("")
+@router.get("", response_model=DocumentDTO)
 def getDocuments():
-    print("To get all documents")
     all_docs = doc_service.getDocuments()
     print(f"DONC: {all_docs}")
-    return list(all_docs)
+    return JSONResponse(content=jsonable_encoder(all_docs))

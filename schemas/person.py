@@ -13,7 +13,7 @@ class Person(Document):
     middle_name = StringField(required=True)
 
     gender = StringField(required=True)
-    email = StringField()
+    email = EmailField()
     telephones = ListField(StringField(required=True))
     address = StringField(required=True)
     birthday = StringField(required=True)

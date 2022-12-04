@@ -1,5 +1,7 @@
 from datetime import datetime
-from mongoengine import StringField, FileField, DateTimeField, DictField, ListField
+
+from mongoengine import (DateTimeField, DictField, FileField, ListField,
+                         StringField)
 
 from schemas.person import Person
 
