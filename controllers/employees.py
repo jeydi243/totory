@@ -1,5 +1,4 @@
 import os
-import pathlib
 from shutil import Error
 
 from fastapi import APIRouter, File, Form, UploadFile
