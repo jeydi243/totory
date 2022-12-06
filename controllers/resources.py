@@ -15,4 +15,4 @@ resource_service = ResourceService()
 @router.get("")
 def get_employees():
     print("To get all employees")
-    return employee_service.all_employee()
+    return resource_service.get()
