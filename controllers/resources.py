@@ -1,7 +1,6 @@
+from rich import print
 from fastapi import APIRouter, File, Form, UploadFile
 from fastapi.exceptions import RequestValidationError, ValidationError
-from rich import print
-
 from services.resource_service import ResourceService
 
 
@@ -12,7 +11,19 @@ router = APIRouter(
 )
 resource_service = ResourceService()
 
+
 @router.get("")
-def get_employees():
-    print("To get all employees")
+def get_resources():
+    print("To get resources info")
     return resource_service.get()
+
+
+@router.post("")
+def add_resource(img: UploadFile = Form()):
+    print(f"To add resource info {img}")
+    return resource_service.add(img)
+
+
+@router.get("/{id}")
+def add_resource(id: str):
+    return resource_service.get(id)
