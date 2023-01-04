@@ -4,7 +4,7 @@ import uvicorn
 import asyncio
 from rich import print
 from dotenv import load_dotenv
-from fastapi import FastAPI, Form, Request, UploadFile, File
+from fastapi import FastAPI, Form, Request, File
 from controllers import teachers, students, employees, users, docs, courses
 from fastapi.middleware.cors import CORSMiddleware
 
