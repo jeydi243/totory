@@ -24,6 +24,6 @@ def add_resource(img: UploadFile = Form()):
     return resource_service.add(img)
 
 
-@router.get("/{id}")
+@router.delete("/{id}")
 def add_resource(id: str):
-    return resource_service.get(id)
+    return resource_service.deleteByID(id)

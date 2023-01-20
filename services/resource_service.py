@@ -1,7 +1,7 @@
 from services.gridfs_service import fs as fss, db
 from fastapi import UploadFile
 from gridfs.grid_file import GridOutCursor, GridOut
-
+from bson.objectid import ObjectId
 
 class ResourceService:
     def getByID(self, id: str) -> list[any]:
@@ -27,13 +27,13 @@ class ResourceService:
         for file in files:
             reponse.append(
                 {
-                    "filename": file.filename,
-                    "upload_date": file.upload_date,
                     "id": str(file._id),
+                    "filename": file.filename,
                     "metadata": file.metadata,
+                    "upload_date": file.upload_date,
+                    "content_type": file.content_type,
                 }
             )
-            # print(f"{file.filename},{file.upload_date},{file._id}")
         return reponse
 
     def add(self, file: UploadFile) -> dict:
@@ -43,3 +43,13 @@ class ResourceService:
         except BaseException as e:
             print(f"Erreur lors du téléchargement {e}")
             return {"message": e}
+
+    def deleteByID(self, id: str):
+        try:
+            if fss.exists(ObjectId(id)):
+                fss.delete(ObjectId(id))
+                return f"The file with {id=}, was deleted"
+            return f"Can't delete file with {id=} does not exist"
+
+        except BaseException as e:
+            print(f"An exception occurred {e.message}")
