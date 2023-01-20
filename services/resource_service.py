@@ -1,19 +1,18 @@
 from services.gridfs_service import fs as fss, db
 from fastapi import UploadFile
+from gridfs.grid_file import GridOutCursor, GridOut
 
 
 class ResourceService:
-    def get(self, id=None) -> list[any]:
+    def getByID(self, id: str) -> list[any]:
+        assert id is not None
         try:
             if id is not None:
                 print(f"Find file with id {id}")
-                fr = fss.find_one({"_id": id})
-                print(f"Voici le fichier que j'ai trouvé {fr}" if fr is not None else "Aucune entrée avec l'ID {id}")
+                file = fss.get(id)
+                return file
             else:
-                return fss.list()
-                # for grido in fss.find():
-                #     print(grido.read())
-                #     grido.
+                return {"message": "No file found"}
         except TypeError as te:
             print("TypeError: ", te)
         except ValueError as ve:
@@ -21,11 +20,26 @@ class ResourceService:
         except BaseException as e:
             print(f"{e}")
 
-    def add(self, file: UploadFile):
-        try:
-            print(f"Trying to pu file {file.file}")
-            fss.put(file.file)
+    def get(self) -> list[dict]:
+        reponse: list[dict] = []
+        files: GridOutCursor = fss.find()
+        file: GridOut
+        for file in files:
+            reponse.append(
+                {
+                    "filename": file.filename,
+                    "upload_date": file.upload_date,
+                    "id": str(file._id),
+                    "metadata": file.metadata,
+                }
+            )
+            # print(f"{file.filename},{file.upload_date},{file._id}")
+        return reponse
 
-            return True
+    def add(self, file: UploadFile) -> dict:
+        try:
+            reponse = fss.put(file.file, filename=file.filename)
+            return {"message": f"The file was uploaded", "id": str(reponse)}
         except BaseException as e:
             print(f"Erreur lors du téléchargement {e}")
+            return {"message": e}

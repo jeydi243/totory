@@ -9,7 +9,7 @@
 
   "window.autoDetectColorScheme": true,
   "workbench.preferredLightColorTheme": "GitHub Light Default",
-  "workbench.preferredDarkColorTheme": "Bearded Theme Arc",
+  "workbench.preferredDarkColorTheme": "Bearded Theme Monokai Black",
   "terminal.integrated.fontFamily": "Cascadia Code",
   "editor.fontFamily": "'Cascadia Code', 'Courier New', monospace",
   "[python]": {
@@ -18,7 +18,7 @@
     "breadcrumbs.showFiles": true,
     "diffEditor.wordWrap": "off"
   },
-  "workbench.colorTheme": "Bearded Theme Arc",
+  "workbench.colorTheme": "Bearded Theme Monokai Black",
   "restoreTerminals.terminals": [
     {
       "splitTerminals": [
