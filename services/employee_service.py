@@ -12,20 +12,22 @@ class EmployeeService:
         try:
             emp = None
             email = self.getEmail(employee.last_name, org_id)
-            if org_id != None:
+            if org_id is not None:
                 emp = Employee({**employee.dict(), org_id: org_id, email: email}).save()
             else:
                 emp = Employee(**employee.dict()).save()
-            print(f"Model Employee saved {emp.id}")
-            return emp
+            print(f"Model Employee saved with {emp.id=}")
+            return emp.to_json(use_db_field=False)
         except ValidationError as ve:
-            print(f"{ve.json()}")
+            print(f"ValidationError: {ve.json()}")
         except TypeError as te:
             print("TypeError: ", te)
         except NotUniqueError as e:
-            print(e.args[0])
+            print(f"NotUniqueError: {e.args[0]}")
         except FieldDoesNotExist as fn:
             print(f"Il te maque un champ {fn}")
+        except BaseException as be:
+            print(f"BaseException: {be}")
 
     def getEmail(self, name, org_id):
         try:
@@ -37,7 +39,10 @@ class EmployeeService:
 
     def all_employee(self) -> list[any]:
         try:
-            return Employee.objects.values_list()
+            doc_list = Employee.objects()
+            all_doc = [d.get() for d in doc_list]
+            print(all_doc)
+            return all_doc
         except TypeError as te:
             print("TypeError: ", te)
         except ValueError as ve:

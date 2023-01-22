@@ -4,12 +4,12 @@ import uvicorn
 import asyncio
 from rich import print
 from dotenv import load_dotenv
-from fastapi import FastAPI, Form, Request, File
+from fastapi import FastAPI, Request, Form, File
 from controllers import teachers, students, employees, users, docs, courses, resources
-from fastapi.middleware.cors import CORSMiddleware
 
-from fastapi.exceptions import RequestValidationError, ValidationError
 from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError, ValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from mongoengine import connect
 
 

@@ -2,6 +2,7 @@ import os
 from shutil import Error
 
 from fastapi import APIRouter, File, Form, UploadFile
+from fastapi.responses import Response
 from fastapi.exceptions import RequestValidationError, ValidationError
 from rich import print
 
@@ -44,17 +45,17 @@ def get_employees():
 
 
 @router.post("")
-def add_employee(employee: EmployeeDTO):
+def add_employee(employeeDTO: EmployeeDTO):
     try:
-        print(employee)
-        employee = employee_service.add_employee(employee)
-        print(f"{employee}")
-        return employee
-    except Error as er:
-        print(f"Error un detected: {er}")
-        return {"f": "ff"}
+        print(employeeDTO.dict())
+        employee_created = employee_service.add_employee(employeeDTO)
+        print(f"{employee_created=}")
+        return employee_created
     except ValidationError as e:
-        print(e.json())
+        print(f"ValidationError:{e.json()}")
+    except BaseException as er:
+        print(f"BaseException: {er}")
+        return Response(status_code=400, content={"message": "Impossible de hacher le DTO"})
 
 
 @router.post("{employee_id}/add_education")
