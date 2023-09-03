@@ -5,7 +5,7 @@ import asyncio
 from rich import print
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Form, File
-from controllers import teachers, students, employees, users, docs, courses, resources, classes
+from controllers import classes_controller, contents_controller, docs_controller, employees_controller, resources_controller, lookups_controller, students_controller, users_controller
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError, ValidationException
 from fastapi.middleware.cors import CORSMiddleware
@@ -24,14 +24,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(docs.router)
-app.include_router(users.router)
-app.include_router(students.router)
-app.include_router(resources.router)
-app.include_router(courses.router)
-app.include_router(classes.router)
-app.include_router(teachers.router)
-app.include_router(employees.router)
+app.include_router(docs_controller.router)
+app.include_router(users_controller.router)
+app.include_router(students_controller.router)
+app.include_router(resources_controller.router)
+app.include_router(contents_controller.router)
+app.include_router(classes_controller.router)
+app.include_router(lookups_controller.router)
+app.include_router(employees_controller.router)
 
 
 @app.exception_handler(RequestValidationError)
@@ -42,7 +42,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     response = {"message": [], "data": None}
 
     for error in exc_json:
-        response["message"].append(error["loc"][1] +' ' + error["msg"])
+        response["message"].append(error["loc"][1] + " " + error["msg"])
 
     return JSONResponse(response, status_code=422)
 
