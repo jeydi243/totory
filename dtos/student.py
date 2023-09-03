@@ -8,9 +8,9 @@ class StudentDTO(PersonDTO):
     gpa: float = Field(..., le=4.0)
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
         arbitrary_types_allowed = True
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "name": "Jane Doe",
                 "email": "jdoe@example.com",
@@ -32,7 +32,7 @@ class UpdateStudentModel(BaseModel):
 
     class Config:
         arbitrary_types_allowed = True
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "name": "Jane Doe",
                 "email": "jdoe@example.com",

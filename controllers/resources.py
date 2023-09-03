@@ -1,7 +1,7 @@
 from rich import print
 from fastapi import APIRouter, File, Form, UploadFile
 from fastapi.responses import FileResponse, Response, StreamingResponse
-from fastapi.exceptions import RequestValidationError, ValidationError
+from fastapi.exceptions import RequestValidationError, ValidationException
 from services.resource_service import ResourceService
 
 

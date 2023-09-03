@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
-from fastapi.exceptions import RequestValidationError, ValidationError
+from fastapi.exceptions import RequestValidationError, ValidationException
 from fastapi.responses import JSONResponse
 
 from dtos.documentDTO import DocumentDTO
@@ -22,7 +22,7 @@ def add_document(document: DocumentDTO):
         doc = doc_service.add(document)
         print(f"Created document {doc}")
         return doc
-    except ValidationError as e:
+    except ValidationException as e:
         print(e.json())
     except BaseException as er:
         print(f"Error un detected: {er}")

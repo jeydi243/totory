@@ -1,7 +1,6 @@
 from datetime import datetime
 
-from mongoengine import (DateTimeField, DictField, FileField, ListField,
-                         StringField)
+from mongoengine import DateTimeField, DictField, FileField, ListField, StringField
 
 from schemas.person import Person
 
@@ -19,6 +18,9 @@ class Employee(Person):
     resume_file = FileField(required=True)
     profile_img = FileField(required=True)
     org_id: str = StringField(require=False)
+
+    def __dict__(self):
+        return {"position": self.position, "resume_file": self.resume_file, "experiences": self.experiences, "profile_img": self.profile_img}
 
     @classmethod
     def pre_save(cls, sender, document, **kwargs):

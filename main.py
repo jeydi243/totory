@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Form, File
 from controllers import teachers, students, employees, users, docs, courses, resources
 from fastapi.responses import JSONResponse
-from fastapi.exceptions import RequestValidationError, ValidationError
+from fastapi.exceptions import RequestValidationError, ValidationException
 from fastapi.middleware.cors import CORSMiddleware
 from mongoengine import connect
 
@@ -34,7 +34,7 @@ app.include_router(employees.router)
 
 
 @app.exception_handler(RequestValidationError)
-@app.exception_handler(ValidationError)
+@app.exception_handler(ValidationException)
 async def validation_exception_handler(request: Request, exc):
     print(f"Invalid data sent: {exc}, {request}")
     exc_json = json.loads(exc.json())

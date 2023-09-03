@@ -1,4 +1,4 @@
-from pydantic import ValidationError
+from fastapi.exceptions import ValidationException
 from mongoengine import DoesNotExist
 from dtos.documentDTO import DocumentDTO
 from dtos.employee import EmployeeDTO
@@ -15,7 +15,7 @@ class DocumentService:
             doc = DocumentOrganisation(**newdoc.dict()).save()
             print(f"Model DocumentOrganisation saved with {doc.id=}")
             return doc
-        except ValidationError as ve:
+        except ValidationException as ve:
             print(f"{ve.json()}")
         except TypeError as te:
             print("TypeError: ", te)

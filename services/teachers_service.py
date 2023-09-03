@@ -1,4 +1,4 @@
-from pydantic import ValidationError
+from pydantic import ValidationException
 from dtos.teacher import TeacherDTO
 from schemas.teacher import Teacher
 from schemas.organization import Organization
@@ -12,7 +12,7 @@ class TeacherService:
             emp = Teacher(**teacher.dict()).save()
             print(f"Model Teacher saved {emp.id}")
             return emp
-        except ValidationError as ve:
+        except ValidationException as ve:
             print(f"{ve.json()}")
         except TypeError as te:
             print("TypeError: ", te)

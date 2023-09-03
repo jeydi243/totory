@@ -1,5 +1,5 @@
 from fastapi import APIRouter, File, Form, UploadFile
-from fastapi.exceptions import RequestValidationError, ValidationError
+from fastapi.exceptions import RequestValidationError, ValidationException
 from rich import print
 
 from dtos.course_dto import CourseDTO
@@ -30,8 +30,8 @@ def add_employee(course: CourseDTO):
     except BaseException as er:
         print(er)
         return {"Error": er}
-    except ValidationError as e:
-        print(e.json())
+    except ValidationException as e:
+        print(e)
 
 
 @router.get("/{id}")

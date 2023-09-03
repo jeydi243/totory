@@ -1,6 +1,6 @@
 from mongoengine import DoesNotExist
 from mongoengine.errors import FieldDoesNotExist, NotUniqueError
-from pydantic import ValidationError
+from fastapi.exceptions import ValidationException
 
 from dtos.employee import EmployeeDTO
 from schemas.employee import Employee
@@ -18,8 +18,8 @@ class EmployeeService:
                 emp = Employee(**employee.dict()).save()
             print(f"Model Employee saved with {emp.id=}")
             return emp.to_json(use_db_field=False)
-        except ValidationError as ve:
-            print(f"ValidationError: {ve.json()}")
+        except ValidationException as ve:
+            print(f"ValidationException: {ve.json()}")
         except TypeError as te:
             print("TypeError: ", te)
         except NotUniqueError as e:
@@ -40,7 +40,7 @@ class EmployeeService:
     def all_employee(self) -> list[any]:
         try:
             doc_list = Employee.objects()
-            all_doc = [d.get() for d in doc_list]
+            all_doc = [d.__dict__() for d in doc_list]
             print(all_doc)
             return all_doc
         except TypeError as te:
