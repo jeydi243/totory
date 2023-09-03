@@ -5,7 +5,7 @@ import asyncio
 from rich import print
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Form, File
-from controllers import teachers, students, employees, users, docs, courses, resources
+from controllers import teachers, students, employees, users, docs, courses, resources, classes
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError, ValidationException
 from fastapi.middleware.cors import CORSMiddleware
@@ -29,19 +29,20 @@ app.include_router(users.router)
 app.include_router(students.router)
 app.include_router(resources.router)
 app.include_router(courses.router)
+app.include_router(classes.router)
 app.include_router(teachers.router)
 app.include_router(employees.router)
 
 
 @app.exception_handler(RequestValidationError)
 @app.exception_handler(ValidationException)
-async def validation_exception_handler(request: Request, exc):
-    print(f"Invalid data sent: {exc}, {request}")
-    exc_json = json.loads(exc.json())
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    print(f"Invalid data sent: {exc.errors()}, {request.body}")
+    exc_json = exc.errors()
     response = {"message": [], "data": None}
 
     for error in exc_json:
-        response["message"].append(error["loc"][0] + error["msg"])
+        response["message"].append(error["loc"][1] +' ' + error["msg"])
 
     return JSONResponse(response, status_code=422)
 
