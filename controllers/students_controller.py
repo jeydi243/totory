@@ -1,7 +1,7 @@
 from mongoengine.errors import NotUniqueError
 from schemas.student import Student
 from fastapi import APIRouter
-from dtos.student import StudentDTO
+from dtos.student_dto import StudentDTO
 
 router = APIRouter(
     prefix="/students",

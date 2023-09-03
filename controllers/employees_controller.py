@@ -7,7 +7,7 @@ from fastapi.exceptions import RequestValidationError, ValidationException
 from rich import print
 
 from dtos.education_dto import EducationDTO
-from dtos.employee import EmployeeDTO
+from dtos.employee_dto import EmployeeDTO
 from myutils import process_file
 from schemas.employee import Employee
 from services.employee_service import EmployeeService

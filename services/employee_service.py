@@ -2,7 +2,7 @@ from mongoengine import DoesNotExist
 from mongoengine.errors import FieldDoesNotExist, NotUniqueError
 from fastapi.exceptions import ValidationException
 
-from dtos.employee import EmployeeDTO
+from dtos.employee_dto import EmployeeDTO
 from schemas.employee import Employee
 from schemas.organization import Organization
 

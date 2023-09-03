@@ -3,7 +3,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError, ValidationException
 from fastapi.responses import JSONResponse
 
-from dtos.documentDTO import DocumentDTO
+from dtos.document_dto import DocumentDTO
 from services.document_service import DocumentService
 
 router = APIRouter(

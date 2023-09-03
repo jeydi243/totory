@@ -1,6 +1,6 @@
 
 from pydantic import ValidationException
-from dtos.student import StudentDTO
+from dtos.student_dto import StudentDTO
 from schemas.student import Student
 from schemas.organization import Organization
 from mongoengine import DoesNotExist
