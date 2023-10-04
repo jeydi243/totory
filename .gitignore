@@ -9,6 +9,8 @@ __pycache__/
 *.py[cod]
 
 venv/
+totory_venv/
+totory_venv/*
 venv/Scripts/
 
 STORAGES/*
