@@ -1,5 +1,4 @@
 from mongoengine import Document, EmailField, StringField
-from pkg_resources import require
 
 
 class Organization(Document):

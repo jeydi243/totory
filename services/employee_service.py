@@ -34,6 +34,8 @@ class EmployeeService:
             print(ex)
 
     def all_employee(self) -> list[any]:
+        l = []
+        
         try:
             # for emp in Employee.objects.to_json():
             #     print(emp)
