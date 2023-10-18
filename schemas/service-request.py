@@ -1,9 +1,15 @@
 from datetime import datetime
-from mongoengine import Document, StringField, DateTimeField, FileField
+from typing import List
+from mongoengine import Document, StringField, DateTimeField, FileField, ListField
+from schemas.resource import Resource
 
 
 class ServiceRequest(Document):
     cover_letter = StringField(required=True, min_length=10, max_length=1000)
-    request_date = DateTimeField(required=True, default=datetime.now())
-    profile_img = FileField(required=True)
-    org_id: str = StringField(require=False)
+    request_date: datetime = DateTimeField(required=True, default=datetime.now())
+    completion_date: datetime = DateTimeField(required=True)
+    student_id: str = StringField(required=True)
+    service_id: str = StringField(require=False)
+    request_status: str = StringField(require=False)
+    attachements: List[str] = ListField(Resource)
+    attachements2: List[str] = ListField(FileField())
