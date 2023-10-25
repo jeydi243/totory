@@ -1,7 +1,7 @@
 
 from pydantic import ValidationError
 from dtos.service_dto import ServiceDTO
-from schemas.service import Service
+from schemas.service import StudentService
 from schemas.organization import Organization
 from mongoengine import DoesNotExist
 from mongoengine.errors import NotUniqueError
@@ -21,9 +21,10 @@ class Service:
             print(e.args[0])
 
     def all_service(self) -> list[any]:
+        l:[] = []
         try:
             if len(Service.objects) == 0:
-                return []
+                return l
             return Service.objects.to_json()
         except TypeError as te:
             print("TypeError: ", te)

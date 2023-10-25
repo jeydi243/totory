@@ -3,7 +3,7 @@ from shutil import Error
 
 from fastapi import APIRouter, File, Form, UploadFile
 from fastapi.responses import Response
-from fastapi.exceptions import RequestValidationError, ValidationException
+from fastapi.exceptions import RequestValidationError, ValidationError
 from rich import print
 
 from dtos.education_dto import EducationDTO
@@ -51,7 +51,7 @@ def add_employee(employeeDTO: EmployeeDTO):
         employee_created = employee_service.add_employee(employeeDTO)
         print(f"{employee_created=}")
         return employee_created
-    except ValidationException as e:
+    except ValidationError as e:
         print(f"ValidationException:{e.json()}")
     except BaseException as er:
         print(f"BaseException: {er}")

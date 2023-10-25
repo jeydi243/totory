@@ -1,5 +1,5 @@
 from fastapi import APIRouter, File, Form, UploadFile
-from fastapi.exceptions import  ValidationException
+from fastapi.exceptions import RequestValidationError, ValidationError
 from rich import print
 
 from dtos.classe_dto import ClasseDTO
@@ -8,6 +8,7 @@ from services.classe_service import ClasseService
 
 router = APIRouter(
     prefix="/classes",
+    tags=["Classes"],
     responses={404: {"description": "Not found methods for /classes"}},
 )
 
@@ -27,11 +28,12 @@ def add_classe(classe: ClasseDTO):
         created_classe = classe_service.add_classe(classe)
         print(f"{created_classe=}")
         return created_classe
+    except ValidationError as e:
+        print(e)
     except BaseException as er:
         print(er)
         return {"Error": er}
-    except ValidationException as e:
-        print(e)
+    
 
 
 @router.get("/{id}")

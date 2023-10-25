@@ -1,4 +1,4 @@
-from fastapi.exceptions import ValidationException
+from fastapi.exceptions import ValidationError
 from mongoengine import DoesNotExist
 from dtos.document_dto import DocumentDTO
 from dtos.employee_dto import EmployeeDTO
@@ -15,7 +15,7 @@ class DocumentService:
             doc = DocumentOrganisation(**newdoc.dict()).save()
             print(f"Model DocumentOrganisation saved with {doc.id=}")
             return doc
-        except ValidationException as ve:
+        except ValidationError as ve:
             print(f"{ve.json()}")
         except TypeError as te:
             print("TypeError: ", te)

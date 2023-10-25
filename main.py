@@ -5,9 +5,8 @@ import asyncio
 from rich import print
 from dotenv import load_dotenv
 from fastapi import FastAPI, Form, Request, UploadFile, File
-from controllers import teachers, students, employees
+from controllers import teachers_controller, students_controller, employees_controller, classes_controller, docs_controller, services_controller, lookups_controller, users_controller
 from fastapi.middleware.cors import CORSMiddleware
-
 from fastapi.exceptions import RequestValidationError, ValidationError
 from fastapi.responses import JSONResponse
 from mongoengine import connect
@@ -25,9 +24,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(teachers.router)
-app.include_router(students.router)
-app.include_router(employees.router)
+app.include_router(students_controller.router)
+app.include_router(users_controller.router)
+app.include_router(teachers_controller.router)
+app.include_router(employees_controller.router)
+app.include_router(classes_controller.router)
+app.include_router(lookups_controller.router)
+app.include_router(docs_controller.router)
+app.include_router(services_controller.router)
 
 
 @app.exception_handler(RequestValidationError)

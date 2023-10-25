@@ -1,5 +1,5 @@
 from fastapi import APIRouter, File, Form, UploadFile
-from fastapi.exceptions import  ValidationException
+from fastapi.exceptions import  ValidationError
 from rich import print
 
 from dtos.lookups_dto import LookupsDTO
@@ -7,7 +7,7 @@ from dtos.education_dto import EducationDTO
 from services.lookups_service import LookupsService
 
 router = APIRouter(
-    prefix="/lookups",
+    prefix="/lookups",tags=["Lookups"],
     responses={404: {"description": "Not found methods for /lookups"}},
 )
 
@@ -30,7 +30,7 @@ def add_classe(classe: LookupsDTO):
     except BaseException as er:
         print(er)
         return {"Error": er}
-    except ValidationException as e:
+    except ValidationError as e:
         print(e)
 
 

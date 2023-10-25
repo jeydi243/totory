@@ -15,6 +15,7 @@
   "[python]": {
     "gitlens.codeLens.symbolScopes": ["!Module"],
     "breadcrumbs.showBooleans": true,
+    "editor.tabCompletion": "on",
     "breadcrumbs.showFiles": true,
     "diffEditor.wordWrap": "off"
   },

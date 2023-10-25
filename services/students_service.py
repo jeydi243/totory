@@ -1,8 +1,6 @@
-
 from pydantic import ValidationError
 from dtos.student import StudentDTO
 from schemas.student import Student
-from schemas.organization import Organization
 from mongoengine import DoesNotExist
 from mongoengine.errors import NotUniqueError
 
@@ -22,16 +20,17 @@ class StudentService:
 
     def getEmail(self, name, org_id):
         try:
-            name_org = Organization.objects(id=org_id).fields(name=1)
+            name_org = Student.objects(id=org_id).fields(name=1)
             domain = ".org"
             return f"{name}@{name_org}{domain}"
         except BaseException as ex:
             print(ex)
 
-    def all_student(self) -> list[any]:
+    def all_students(self) -> list[any]:
+        l = []
         try:
             if len(Student.objects) == 0:
-                return []
+                return l
             return Student.objects.to_json()
         except TypeError as te:
             print("TypeError: ", te)
