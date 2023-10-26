@@ -2,31 +2,31 @@ from fastapi import APIRouter, File, Form, UploadFile
 from fastapi.exceptions import RequestValidationError, ValidationException
 from rich import print
 
-from dtos.course_dto import CourseDTO
+from dtos.content_dto import ContentDTO
 from dtos.education_dto import EducationDTO
-from services.course_service import CourseService
+from services.content_service import ContentService
 
 router = APIRouter(
-    prefix="/courses",
+    prefix="/contents",
     responses={404: {"description": "Not found methods"}},
 )
 
-course_service = CourseService()
+content_service = ContentService()
 
 
 @router.get("")
-def get_courses():
-    print("Get all Courses")
-    return course_service.getCourses()
+def get_contents():
+    print("Get all Contents")
+    return content_service.getContents()
 
 
 @router.post("")
-def add_employee(course: CourseDTO):
+def add_employee(content: ContentDTO):
     try:
-        print(course)
-        created_course = course_service.add_course(course)
-        print(f"{created_course=}")
-        return created_course
+        print(content)
+        created_content = content_service.add_content(content)
+        print(f"{created_content=}")
+        return created_content
     except BaseException as er:
         print(er)
         return {"Error": er}
@@ -36,4 +36,4 @@ def add_employee(course: CourseDTO):
 
 @router.get("/{id}")
 def getById(id: str):
-    return course_service.getById(id)
+    return content_service.getById(id)

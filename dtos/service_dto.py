@@ -6,4 +6,4 @@ class ServiceDTO(BaseModel):
     name: str = Field(alias="title")
     contact: str = Field(...)
     website: str = Field(...)
-    description: str = Field(...)
+    description: str = Field(...)  

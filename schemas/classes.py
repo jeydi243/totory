@@ -1,5 +1,5 @@
 from bson import ObjectId
-from mongoengine import Document, StringField, DateTimeField, ObjectIdField
+from mongoengine import Document, StringField, DateTimeField, ObjectIdField, ReferenceField
 from datetime import datetime
 
 
@@ -8,6 +8,7 @@ class Classes(Document):
     name: str = StringField(required=True, min_length=3)
     code: str = StringField(required=True, min_length=2)
     description: str = StringField(required=True, min_length=5)
+    parent_classe_id: str = ReferenceField("self")
 
     def __dict__(self):
         return {"name": self.name, "description": self.description, "code": self.code}

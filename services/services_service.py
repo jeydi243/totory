@@ -1,4 +1,3 @@
-
 from pydantic import ValidationError
 from dtos.service_dto import ServiceDTO
 from schemas.service import StudentService
@@ -7,10 +6,10 @@ from mongoengine import DoesNotExist
 from mongoengine.errors import NotUniqueError
 
 
-class Service:
+class SService:
     def add_service(self, service: ServiceDTO, org_id=None) -> bool | str:
         try:
-            emp = Service(**service.dict()).save()
+            emp = StudentService(**service.dict()).save()
             print(f"Model Service saved {emp.id}")
             return emp
         except ValidationError as ve:
@@ -21,11 +20,11 @@ class Service:
             print(e.args[0])
 
     def all_service(self) -> list[any]:
-        l:[] = []
+        l: [] = []
         try:
-            if len(Service.objects) == 0:
+            if len(StudentService.objects) == 0:
                 return l
-            return Service.objects.to_json()
+            return StudentService.objects.to_json()
         except TypeError as te:
             print("TypeError: ", te)
         except ValueError as ve:
@@ -45,11 +44,16 @@ class Service:
         except DoesNotExist as e:
             print(f"Service with ID {serviceID}, does not exist.")
 
-    def update_file(fieldname, fichier):
-        pass
+    def updateFile(self,serviceID, file):
+        serv = StudentService.objects(id=serviceID).update_one(set__img=file)
+        serv.img.replace(file)
+        serv.save()
 
-    def add_education(serviceID, education):
-        Service.objects(id=serviceID).update_one(push__educations=education)
+    def add_education(self,serviceID, education):
+        StudentService.objects(id=serviceID).update_one(push__educations=education)
+        
+    def add_skills(self,serviceID, skill):
+        StudentService.objects(id=serviceID).update_one(push__skills=skill)
 
-    def update_service(service_id, updated_values):
+    def update_service(self,serviceID, updated_values):
         pass

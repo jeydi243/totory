@@ -4,7 +4,7 @@ from member import Member
 from dtos.person import PersonDTO
 
 class StudentDTO(PersonDTO):
-    course: str = Field(...)
+    content: str = Field(...)
     gpa: float = Field(..., le=4.0)
 
     class Config:
@@ -14,7 +14,7 @@ class StudentDTO(PersonDTO):
             "example": {
                 "name": "Jane Doe",
                 "email": "jdoe@example.com",
-                "course": "Experiments, Science, and Fashion in Nanophotonics",
+                "content": "Experiments, Science, and Fashion in Nanophotonics",
                 "gpa": "3.0",
             }
         }
@@ -27,7 +27,7 @@ class StudentDTO(BaseModel):
 class UpdateStudentModel(BaseModel):
     name: Optional[str]
     email: Optional[EmailStr]
-    course: Optional[str]
+    content: Optional[str]
     gpa: Optional[float]
 
     class Config:
@@ -36,7 +36,7 @@ class UpdateStudentModel(BaseModel):
             "example": {
                 "name": "Jane Doe",
                 "email": "jdoe@example.com",
-                "course": "Experiments, Science, and Fashion in Nanophotonics",
+                "content": "Experiments, Science, and Fashion in Nanophotonics",
                 "gpa": "3.0",
             }
         }

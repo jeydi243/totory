@@ -4,36 +4,33 @@ from typing import Annotated
 from fastapi.responses import FileResponse
 from dtos.service_dto import ServiceDTO
 from services.manage_service import ManageService
-from services.services_service import Service
+from services.services_service import SService
 
 router = APIRouter(
     prefix="/services",
     tags=["services"],
     responses={404: {"description": "Not found"}},
 )
-service = Service()
+service = SService()
 
 
-@router.post("/service")
-def registerService(service: ServiceDTO):
+@router.post("/")
+def registerNewService(service: ServiceDTO):
     print(service)
     return service.add_service(service)
 
 
-@router.get("/service", description="Get all services")
+@router.get("/", description="Get all services")
 def getServices():
     return service.all_services()
 
 
-@router.put("/service", description="Update the image of service", summary="Update the image of service", response_description="Object containing the filename and other information of file")
-def updateFile(img: UploadFile, form: Annotated[str, Form()]):
-    return {"content": "", "filename": img.filename, "content_type": img.content_type}
-    return FileResponse(
-        filename="I Love How To use Fastapi",
-        status_code=200,
-    )
-
-
-@router.get("management/documents")
-def getDocs():
-    return []
+@router.put("/img", description="Update the image of service", summary="Update the image of service", response_description="Object containing the filename and other information of file")
+def updateFile(img: UploadFile):
+    print(img.filename)
+    service.updateFile(img.file)
+    #return {"form": "form", "filename": img.filename, "content_type": img.content_type}
+    # return FileResponse(
+    #     filename="I Love How To use Fastapi",
+    #     status_code=200,
+    # )
