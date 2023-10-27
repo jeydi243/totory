@@ -4,7 +4,6 @@ colorama==0.4.6
 dnspython==2.2.1
 email-validator==2.0.0.post2
 fastapi==0.88.0
-gunicorn==21.2.0
 h11==0.14.0
 idna==3.4
 markdown-it-py==3.0.0
