@@ -1,6 +1,6 @@
 from typing import Optional
 from pydantic import BaseModel, Field, EmailStr
-from member import Member
+from schemas.member import Member
 from dtos.person import PersonDTO
 
 class StudentDTO(PersonDTO):
