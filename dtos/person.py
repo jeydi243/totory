@@ -1,8 +1,6 @@
 from datetime import datetime
 from typing import List
-
 from pydantic import BaseModel, Field, validator
-
 
 class PersonDTO(BaseModel):
     first_name: str = Field(...)

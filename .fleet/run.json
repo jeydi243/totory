@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "type": "fastapi",
+            "name": "Fastapi configuration",
+            "module": "main",
+            "application": "app",
+            "arguments": [
+                "--reload",
+                "--port=4000"
+            ],
+        },
+        
+    ]
+}
