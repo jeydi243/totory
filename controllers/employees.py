@@ -2,7 +2,8 @@ import os
 from tempfile import SpooledTemporaryFile
 from dtos.education_dto import EducationDTO
 from dtos.employee import EmployeeDTO
-from fastapi.exceptions import RequestValidationError, ValidationError
+from fastapi.exceptions import RequestValidationError
+from pydantic import ValidationError
 from myutils import process_file
 from schemas.employee import Employee
 from services.employee_service import EmployeeService

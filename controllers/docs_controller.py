@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
-from fastapi.exceptions import RequestValidationError, ValidationError
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-
+from pydantic import ValidationError
 from dtos.document_dto import DocumentDTO
 from services.document_service import DocumentService
 

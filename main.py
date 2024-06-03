@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, Form, Request, UploadFile, File
 from controllers import teachers_controller, students_controller, employees_controller, classes_controller, docs_controller, services_controller, lookups_controller, users_controller
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.exceptions import RequestValidationError, ValidationError
+from fastapi.exceptions import RequestValidationError
+from pydantic import ValidationError
 from fastapi.responses import JSONResponse
 from mongoengine import connect
 

@@ -1,4 +1,4 @@
-from fastapi.exceptions import ValidationError
+from pydantic import ValidationError
 from mongoengine import DoesNotExist
 from dtos.document_dto import DocumentDTO
 from dtos.employee_dto import EmployeeDTO

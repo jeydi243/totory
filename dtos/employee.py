@@ -14,7 +14,7 @@ class EmployeeDTO(PersonDTO):
     onboarding: list = None
     cover_letter: str = Field(max_length=500)
 
-    # @validator("school_start_date")
+    # @field_validator("school_start_date")
     # def start_valid(cls, v, values):
     #     print(values)
     #     if v > values["school_end_date"]:

@@ -1,5 +1,11 @@
 from bson import ObjectId
-from mongoengine import Document, StringField, DateTimeField, ObjectIdField, ReferenceField
+from mongoengine import (
+    Document,
+    StringField,
+    DateTimeField,
+    ObjectIdField,
+    ReferenceField,
+)
 from datetime import datetime
 
 
@@ -11,10 +17,16 @@ class Classes(Document):
     parent_classe_id: str = ReferenceField("self")
 
     def __dict__(self):
-        return {"name": self.name, "description": self.description, "code": self.code}
+        return {
+            "id": str(self.id),
+            "name": self.name,
+            "description": self.description,
+            "code": self.code,
+        }
 
     # audit fields
-    created: datetime = DateTimeField(default=datetime.utcnow)
-    created_by = StringField(default="Epa")
-    updated: datetime = DateTimeField(default=datetime.utcnow)
+    created: datetime = DateTimeField(default=datetime.now())
+    created_by: str = StringField(default="user")
+    updated: datetime = DateTimeField(default=datetime.now())
+    updated_by: str = StringField(default="user")
     meta = {"strict": False}

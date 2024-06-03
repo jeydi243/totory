@@ -3,7 +3,8 @@ from shutil import Error
 
 from fastapi import APIRouter, File, Form, UploadFile
 from fastapi.responses import Response
-from fastapi.exceptions import RequestValidationError, ValidationError
+from fastapi.exceptions import RequestValidationError
+from pydantic import ValidationError
 from rich import print
 
 from dtos.education_dto import EducationDTO

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, File, Form, UploadFile
-from fastapi.exceptions import RequestValidationError, ValidationError
+from fastapi.exceptions import RequestValidationError
 from rich import print
-
+from pydantic import ValidationError
 from dtos.classe_dto import ClasseDTO
 from dtos.education_dto import EducationDTO
 from services.classe_service import ClasseService
@@ -38,4 +38,4 @@ def add_classe(classe: ClasseDTO):
 
 @router.get("/{id}")
 def getById(id: str):
-    return classe_service.getById(id)
+    return classe_service.getClasseByID(id)

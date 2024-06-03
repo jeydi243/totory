@@ -17,6 +17,11 @@ class Employee(Person):
     resume_file = FileField(required=True)
     profile_img = FileField(required=True)
     org_id: str = StringField(require=False)
+    
+    created: datetime = DateTimeField(default=datetime.now())
+    created_by: str = StringField(default="user")
+    updated: datetime = DateTimeField(default=datetime.now())
+    updated_by: str = StringField(default="user")
 
     @classmethod
     def pre_save(cls, sender, document, **kwargs):
@@ -32,7 +37,7 @@ class Employee(Person):
                 print("Updated")
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
     # # init class
     # def __init__(self, **args):

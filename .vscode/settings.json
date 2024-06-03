@@ -7,7 +7,7 @@
   "python.linting.enabled": true,
   "python.formatting.blackPath": "black",
 
-  "window.autoDetectColorScheme": true,
+  "window.autoDetectColorScheme": false,
   "workbench.preferredLightColorTheme": "GitHub Light Default",
   "workbench.preferredDarkColorTheme": "Bearded Theme Arc",
   "terminal.integrated.fontFamily": "Cascadia Code",
