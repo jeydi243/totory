@@ -14,7 +14,7 @@ class Classes(Document):
     name: str = StringField(required=True, min_length=3)
     code: str = StringField(required=True, min_length=2)
     description: str = StringField(required=True, min_length=5)
-    parent_classe_id: str = ReferenceField("self")
+    parent_classe_id = ReferenceField("self")
 
     def __dict__(self):
         return {
@@ -22,6 +22,7 @@ class Classes(Document):
             "name": self.name,
             "description": self.description,
             "code": self.code,
+            "parent_classe_id": str(self.parent_classe_id) if self.parent_classe_id else None,
         }
 
     # audit fields
@@ -29,4 +30,5 @@ class Classes(Document):
     created_by: str = StringField(default="user")
     updated: datetime = DateTimeField(default=datetime.now())
     updated_by: str = StringField(default="user")
+    
     meta = {"strict": False}

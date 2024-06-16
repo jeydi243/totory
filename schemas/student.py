@@ -1,10 +1,7 @@
 from mongoengine import (
-    EmailField,
     StringField,
-    IntField,
     ReferenceField,
     DateTimeField,
-    DictField,
     ListField,
 )
 from schemas.person import Person
@@ -14,7 +11,7 @@ from datetime import datetime
 
 
 class Student(Person):
-    matricule: str = StringField(primary_key=True, min_length=10, unique=True)
+    matricule: str = StringField(min_length=10, unique=True)
     responsables: str = ListField(Responsable)
     status: str = StringField(
         required=True, choices=["CANDIDAT", "ETUDIANT", "DIPLOMÉ", "ABANDON", "RENVOI"]

@@ -1,9 +1,11 @@
-from mongoengine import Document, EmailField, StringField, ReferenceField, DateTimeField
+from mongoengine import Document, ObjectIdField, StringField, ReferenceField, DateTimeField
 import mongoengine
+from bson import ObjectId
 from datetime import datetime
 
 
 class Organization(Document):
+    id: str = ObjectIdField(primary_key=True, default=ObjectId())
     code: str = StringField(require=True)
     name: str = StringField(require=True)
     description: str = StringField()

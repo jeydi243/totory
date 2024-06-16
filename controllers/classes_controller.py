@@ -20,6 +20,11 @@ def get_classes():
     print("Get all Classes")
     return classe_service.getClasses()
 
+@router.get("/count")
+def get_classes() -> int:
+    print("Count all Classes")
+    return classe_service.getCountClasses()
+
 
 @router.post("")
 def add_classe(classe: ClasseDTO):
@@ -34,7 +39,6 @@ def add_classe(classe: ClasseDTO):
         print(er)
         return {"Error": er}
     
-
 
 @router.get("/{id}")
 def getById(id: str):

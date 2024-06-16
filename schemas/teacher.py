@@ -4,7 +4,7 @@ from schemas.person import Person
 
 
 class Teacher(Person):
-    matricule:str=  StringField(primary_key=True, min_length=7)
+    matricule:str =  StringField(min_length=7)
     resume_file:str = StringField(required=True)
     
     #Audit fields

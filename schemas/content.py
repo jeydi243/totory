@@ -26,6 +26,18 @@ class Content(Document):
     created_by: str = StringField(default="user")
     updated: datetime = DateTimeField(default=datetime.now())
     updated_by: str = StringField(default="user")
+    
+    def __dict__(self):
+        return {
+            "id": str(self.id),
+            "code": self.code,
+            "title": self.title,
+            "parts": self.parts,
+            "authors": self.authors,
+            "expireDate": self.expireDate.strftime("%d-%m-%Y") if self.expireDate else None,
+            "description": self.description,
+            "parent_classe_id": str(self.parent_classe_id) if self.parent_classe_id else None,
+        }
 
     meta = {"strict": False}
 

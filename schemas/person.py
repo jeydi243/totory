@@ -1,17 +1,27 @@
 from enum import unique
-from mongoengine import Document, EmailField, StringField, IntField, DateTimeField, ListField
+from mongoengine import (
+    Document,
+    EmailField,
+    StringField,
+    ObjectIdField,
+    DateTimeField,
+    ListField,
+)
 from datetime import datetime
+from bson import ObjectId
+
 
 class Person(Document):
-    personal_email = EmailField(required=True, unique=True)
-    first_name = StringField(required=True)
-    last_name = StringField(required=True)
-    middle_name = StringField(required=True)
+    id: str = ObjectIdField(primary_key=True, default=ObjectId())
+    personal_email: str = EmailField(required=True, unique=True)
+    first_name: str = StringField(required=True)
+    last_name: str = StringField(required=True)
+    middle_name: str = StringField(required=True)
 
-    gender = StringField(required=True)
-    email = StringField()
-    telephones = ListField(StringField(required=True))
-    address = StringField(required=True)
-    birthday = StringField(required=True)
+    gender: str = StringField(required=True)
+    email: str = StringField()
+    telephones: str = ListField(StringField(required=True))
+    address: str = StringField(required=True)
+    birthday: str = StringField(required=True)
 
     meta = {"abstract": True, "strict": False}
