@@ -12,7 +12,7 @@ from datetime import datetime
 
 class Student(Person):
     matricule: str = StringField(min_length=10, unique=True)
-    responsables: str = ListField(Responsable)
+    responsables: str = ListField()
     status: str = StringField(
         required=True, choices=["CANDIDAT", "ETUDIANT", "DIPLOMÉ", "ABANDON", "RENVOI"]
     )
@@ -21,7 +21,7 @@ class Student(Person):
         choices=["Prépa", "Bac", "Bac+1", "Bac+2", "Bac+3", "Bac+4", "Bac+5", "Bac+6"],
     )
     highSchool: str = ReferenceField("HighSchool")
-    documents: str = ListField(DocumentOrganisation)
+    documents: str = ListField()
 
     # Audit fields
     created: datetime = DateTimeField(default=datetime.now())
