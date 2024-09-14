@@ -3,7 +3,6 @@ from fastapi import APIRouter, UploadFile, Form, File
 from typing import Annotated
 from fastapi.responses import FileResponse
 from dtos.service_dto import ServiceDTO
-from services.manage_service import ManageService
 from services.services_service import SService
 
 router = APIRouter(

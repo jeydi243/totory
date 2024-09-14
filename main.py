@@ -4,14 +4,14 @@ import uvicorn
 import logging
 from rich import print
 from dotenv import load_dotenv
-from fastapi import FastAPI, Form, Request, UploadFile, File,status
-from fastapi.encoders import jsonable_encoder
-from controllers import teachers_controller, students_controller, employees_controller, classes_controller, docs_controller, services_controller, lookups_controller, users_controller
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.exceptions import RequestValidationError
+from fastapi import FastAPI, Request, status
 from pydantic import ValidationError
-from fastapi.responses import JSONResponse
 from mongoengine import connect
+from controllers import teachers_controller, students_controller, employees_controller, classes_controller, docs_controller, services_controller, lookups_controller, users_controller, org_controller
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 
@@ -35,6 +35,7 @@ app.include_router(classes_controller.router)
 app.include_router(lookups_controller.router)
 app.include_router(docs_controller.router)
 app.include_router(services_controller.router)
+app.include_router(org_controller.router)
 
 
 # Configure the logger

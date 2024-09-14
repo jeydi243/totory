@@ -17,12 +17,9 @@ class ClasseService:
 
     def getClasses(self):
         try:
-            json_strings = [doc.to_json() for doc in Classes.objects()]
-            json_test = [doc.__dict__() for doc in Classes.objects()]
-            print(f"Ici = {json_test}")
-            return json_test
-            # json_objects = [json.loads(json_str) for json_str in json_strings]
-            # return json_objects
+            json_results = [doc.__dict__() for doc in Classes.objects()]
+            print(f"Found {len(json_results)} classes")
+            return json_results
         except BaseException as e:
             print(e)
             

@@ -11,13 +11,13 @@ router = APIRouter(
 manage_service = ManageService()
 
 
-@router.post("/organization")
+@router.post("/organizations")
 def registerOrg(organization: OrgDTO):
     print(organization)
     return manage_service.registerOrg(organization)
 
 
-@router.get("/organization")
+@router.get("/organizations")
 def getOrgs():
     return manage_service.getOrgs()
 

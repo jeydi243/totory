@@ -6,10 +6,11 @@ from mongoengine import DoesNotExist
 class ManageService:
     def registerOrg(self, organization: OrgDTO):
         try:
-            org = Organization(**organization.dict()).save()
+            org = Organization(**dict(organization)).save()
             return org
         except BaseException as e:
             print(e)
+            return {"erreur": e}
 
     def getOrgs(self):
         try:

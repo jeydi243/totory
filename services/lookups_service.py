@@ -27,19 +27,30 @@ class LookupsService:
 
     def updateLookups(self, lookupsUpdate: LookupsDTO):
         try:
-            print(f'I want to update lookup with ID={lookupsUpdate.id}')
+            print(f'Update lookup with ID={lookupsUpdate.id}')
             lookups_found = Lookups.objects.get(id=ObjectId(lookupsUpdate.id))
             for key, value in dict(lookupsUpdate).items():
-                if key != "id" and value != None:
+                if key != 'classe_id':
                     lookups_found[key] = value
-                    print(f"Update key={key} by value={value}")
+                    print(f"Update key={key} by value='{value}'")
+                    
+                elif key == 'classe_id' and self.is_valid_objectid(value) == True:
+                    lookups_found[key] = value
+                    
             lookups_found.save()
+            
         except ValidationException as e:
             print(f"An ValidationException occurred {e} ")    
         except BaseException as e:
             print(f"An exception occurred {e} ")
         
-
+    def is_valid_objectid(objectid_str):
+        try:
+            ObjectId(objectid_str)
+            return True
+        except Exception:
+            return False
+        
     def createClasseRef(self, classe_id: str) -> Classes:
         return Classes.objects(id=classe_id)
 
@@ -100,3 +111,5 @@ class LookupsService:
                 data[field] = value
         data["_id"] = str(doc.id)
         return data
+
+
