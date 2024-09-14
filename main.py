@@ -73,7 +73,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 @app.get("/")
 async def root():
-    return {"message": "Hello Bigger Applications!"}
+    return {"message": "Bonjour, Bienvenue dans totory"}
 
 
 if __name__ == "__main__":
