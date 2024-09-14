@@ -3,7 +3,6 @@ from typing import List
 
 from pydantic import BaseModel, Field, field_validator
 
-
 class PersonDTO(BaseModel):
     first_name: str = Field(...)
     last_name: str = Field(...)
